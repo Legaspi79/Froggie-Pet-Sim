@@ -14,7 +14,35 @@ export const allFood = {
 
 }
 
+export const allToys = {
+    "Toy Cellphone": {
+        happiness: 2,
+        hunger: -1
+    },
+    "Bionicle Toa Inika Set": {
+        happiness: 4,
+        hunger: -2
+    },
+    "Frisbee": {
+        happiness: 3,
+        hunger: -4
+    },
+    "Butterfly YoYo": {
+        happiness: 1,
+        hunger: -1
+    }
+
+}
+
 export const mainMenu = {
     name: "Froggie",
-    hungerMeter: 5
+    hungerMeter: 5,
+    happinessMeter: 5
 }
+
+//STATUS BAR
+
+let hungerBar = document.getElementById("hungerMeter");
+let happinessBar = document.getElementById("happinessMeter");
+hungerBar.innerText = "Hunger: " + mainMenu.hungerMeter;
+happinessBar.innerText = "Happiness: " + mainMenu.happinessMeter;

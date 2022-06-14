@@ -23,6 +23,34 @@
     margin-bottom: 100px;
     
     
+    
+}
+
+.statusBar {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border: solid blue;
+    height: 95px;
+    width: 25%;
+    justify-content: space-around;
+
+}
+
+.eventBar {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border: solid purple;
+    height: 95px;
+    width: 50%;
+    left: 25%;
+    align-items: center;
+}
+
+.currentEvent {
+    position: absolute;
+    top: 50%
 }
 
 img {

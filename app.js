@@ -8,27 +8,20 @@ const menuButton = document.getElementById("menuButton");
 // feedButton.addEventListener("click", feed);
 feedButton.addEventListener("click", loadFood);
 playButton.addEventListener("click", play);
-shopButton.addEventListener("click", shop);
-menuButton.addEventListener("click", menu);
+
 
 let hungerBar = document.getElementById("hungerMeter");
 let happinessBar = document.getElementById("happinessMeter");
 let currentEvent = document.getElementById("currentEvent");
 
-// function feed() {
-//     console.log(Object.keys(allFood))
-//     console.log(allFood['Dino Nuggets'].hunger)
+//time
+let hungerTimer = setTimeout(decreaseHunger, 60000);
+
     
-// }
-
-
 //Play button
 function play() {
     console.log("You played with Froggie!");
-    // mainMenu.happinessMeter += 1;
-    // mainMenu.hungerMeter -=1;
-    // happinessBar.innerText = "Happiness: " + mainMenu.happinessMeter;
-    // hungerBar.innerText = "Hunger: " + mainMenu.hungerMeter;
+
     let toyInventory = Object.keys(allToys);
     const toyList = document.getElementById("toyInventory");
     const selectButton = document.createElement("button");
@@ -72,6 +65,10 @@ function play() {
             toyList.innerHTML = '';
             currentEvent.innerText = ("Froggie played with the " + selected);
             }
+            if (mainMenu.hungerMeter <= 0) {
+
+                currentEvent.innerText = ("You played so much that Froggie forgot to eat and DIED");
+            }
         
         })
     cancelButton.addEventListener("click", function () {
@@ -83,17 +80,8 @@ function play() {
     console.log(mainMenu.happinessMeter);
 
 
-function shop() {
-    console.log("Shopping time!");
-}
-
-function menu() {
-    console.log(mainMenu.name);
-    console.log(mainMenu.hungerMeter);
-    console.log(mainMenu.happinessMeter);
-}
-
 function loadFood() {
+   
     let foodInventory = Object.keys(allFood);
     const foodList = document.getElementById("foodInventory");
     const selectButton = document.createElement("button");
@@ -137,5 +125,24 @@ function loadFood() {
   
 } 
 
+//function to decrease hunger over time
 
+function decreaseHunger() {
+    console.log('hunger decreased');  
+    mainMenu.hungerMeter -= 1;    
+    hungerBar.innerText = "Hunger: " + mainMenu.hungerMeter;
+    if (mainMenu.hungerMeter == 0) {
+        currentEvent.innerText = ("Froggie got too hungry and ran away :(");
+    } else {
+        console.log(mainMenu.hungerMeter);
+    hungerTimer = setTimeout(decreaseHunger, 60000);
+    }
+    
+    
+}
+
+if (mainMenu.hungerMeter <= 0) {
+    console.log("Froggie got too hungry and ran away :(");
+}
+ 
 

@@ -16,6 +16,11 @@ let currentEvent = document.getElementById("currentEvent");
 
 //time
 let hungerTimer = setTimeout(decreaseHunger, 60000);
+let happinessMeter = setTimeout(decreaseHappiness, 80000);
+
+//animation
+
+let animation = document.getElementById("animation");
 
     
 //Play button
@@ -55,6 +60,8 @@ function play() {
             happinessBar.innerText = "Happiness: " + mainMenu.happinessMeter;
             currentEvent.innerText = ("Froggie played with the " + selected);
             toyList.innerHTML = '';
+            animation.src = "assetts/frog 1 play.gif";
+            let animationTime = setTimeout(backToIdle, 3000);
         }  else {
             console.log(allToys[selected].happiness)
             mainMenu.happinessMeter += (allToys[selected].happiness);
@@ -64,10 +71,14 @@ function play() {
             console.log(mainMenu.hungerMeter);
             toyList.innerHTML = '';
             currentEvent.innerText = ("Froggie played with the " + selected);
+            animation.src = "assetts/frog 1 play.gif";
+            let animationTime = setTimeout(backToIdle, 3000);
             }
-            if (mainMenu.hungerMeter <= 0) {
+            if (mainMenu.hungerMeter < 1) {
 
                 currentEvent.innerText = ("You played so much that Froggie forgot to eat and DIED");
+                animation.src = "assetts/froggie death.png";
+                let animationTime = setTimeout(death, 3000);
             }
         
         })
@@ -115,7 +126,10 @@ function loadFood() {
         hungerBar.innerText = "Hunger: " + mainMenu.hungerMeter;
         foodList.innerHTML = '';
         currentEvent.innerText = ("Froggie ate the " + selected);
-        //console.log("Froggie ate the " + selected);
+  
+        //Changes  toFeeding Animation
+        animation.src = "assetts/frog 1 eating.gif";
+        let animationTime = setTimeout(backToIdle, 99999999);
         }
         
     })
@@ -132,7 +146,9 @@ function decreaseHunger() {
     mainMenu.hungerMeter -= 1;    
     hungerBar.innerText = "Hunger: " + mainMenu.hungerMeter;
     if (mainMenu.hungerMeter == 0) {
-        currentEvent.innerText = ("Froggie got too hungry and ran away :(");
+        currentEvent.innerText = ("Froggie got too hungry and DIED :(");
+        animation.src = "assetts/froggie death.png";
+        let animationTime = setTimeout(death, 3000);
     } else {
         console.log(mainMenu.hungerMeter);
     hungerTimer = setTimeout(decreaseHunger, 60000);
@@ -141,8 +157,29 @@ function decreaseHunger() {
     
 }
 
-if (mainMenu.hungerMeter <= 0) {
-    console.log("Froggie got too hungry and ran away :(");
+function decreaseHappiness() {
+    console.log('happiness decreased');  
+    mainMenu.happinessMeter -= 1;    
+    happinessBar.innerText = "Happiness: " + mainMenu.happinessMeter;
+    if (mainMenu.happinessMeter < 1) {
+        currentEvent.innerText = ("Froggie DIED of unhappiness :(");
+        animation.src = "assetts/froggie death.png";
+        let animationTime = setTimeout(death, 3000);
+    } else {
+        console.log(mainMenu.happinessMeter);
+    hungerTimer = setTimeout(decreaseHappiness, 80000);
+    }
+    
+    
 }
+
+
  
 
+function backToIdle() {
+    animation.src = "assetts/frog 1 idle.gif";
+}
+
+function death() {
+    animation.src = "assetts/froggie death.png";
+}
